@@ -1,18 +1,24 @@
+"""Cart files."""
+# Standard Library
 from decimal import Decimal
+
+# Django
 from django.conf import settings
+
+# Project
 from core.models import Product
 
 
-class Cart(object):
+class Cart(object):  # noqa D101
 
-    def __init__(self, request):
+    def __init__(self, request):  # noqa D107
         self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-    def __iter__(self):
+    def __iter__(self):  # noqa D105
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
 
@@ -25,10 +31,10 @@ class Cart(object):
             item['total_price'] = item['price'] * item['quantity']
             yield item
 
-    def __len__(self):
+    def __len__(self):  # noqa D105
         return sum(item['quantity'] for item in self.cart.values())
 
-    def add(self, product, quantity=1, override_quantity=False):
+    def add(self, product, quantity=1, override_quantity=False):  # noqa D102
         product_id = str(product.id)
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0,
@@ -39,18 +45,18 @@ class Cart(object):
             self.cart[product_id]['quantity'] += quantity
         self.save()
 
-    def save(self):
+    def save(self):  # noqa D102
         self.session.modified = True
 
-    def remove(self, product):
+    def remove(self, product):  # noqa D102
         product_id = str(product.id)
         if product_id in self.cart:
             del self.cart[product_id]
             self.save()
 
-    def clear(self):
+    def clear(self):  # noqa D102
         del self.session[settings.CART_SESSION_ID]
         self.save()
 
-    def get_total_price(self):
+    def get_total_price(self):  # noqa D102
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())

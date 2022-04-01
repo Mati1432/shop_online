@@ -1,10 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+"""Views files."""
+# Django
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 
+# Project
 from cart.forms import CartForm
-from core.models import Product, Category
+from core.models import Category
+from core.models import Product
 
 
-def product_list(request, category_slug=None):
+def product_list(request, category_slug=None):  # noqa D103
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
@@ -18,7 +23,7 @@ def product_list(request, category_slug=None):
     })
 
 
-def product_detail(request, id, slug):
+def product_detail(request, id, slug):  # noqa D103
     product = get_object_or_404(
         Product,
         id=id,
@@ -26,4 +31,5 @@ def product_detail(request, id, slug):
         available=True,
     )
     cart_product = CartForm()
-    return render(request, 'detail_product.html', {'product': product, 'cart_product': cart_product})
+    return render(request, 'detail_product.html',
+                  {'product': product, 'cart_product': cart_product})

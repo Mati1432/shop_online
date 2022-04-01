@@ -1,28 +1,30 @@
+"""Models files."""
+# Django
 from django.db import models
 from django.urls import reverse
 
 
-class Category(models.Model):
+class Category(models.Model):  # noqa D101
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
 
-    class Meta:
+    class Meta:  # noqa D106
         ordering = ('name',)
         verbose_name = 'category'
         verbose_name_plural = 'categories'
 
-    def __str__(self):
+    def __str__(self):  # noqa D105
         return f'{self.name}'
 
-    def get_absolute_url(self):
+    def get_absolute_url(self):  # noqa D102
         return reverse('core:product_list_by_category', args=[self.slug])
 
 
-class Product(models.Model):
+class Product(models.Model):  # noqa D101
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
-        related_name='products'
+        related_name='products',
     )
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
@@ -33,12 +35,12 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    class Meta:
+    class Meta:  # noqa D106
         ordering = ('name',)
         index_together = (('id', 'slug'),)
 
-    def __str__(self):
+    def __str__(self):  # noqa D105
         return f'{self.name}'
 
-    def get_absolute_url(self):
+    def get_absolute_url(self):  # noqa D102
         return reverse('core:product_detail', args=[self.id, self.slug])
