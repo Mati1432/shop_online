@@ -1,11 +1,13 @@
 """Models files."""
 
+# Django
 from django.db import models
 
+# Project
 from core.models import Product
 
 
-class Order(models.Model):
+class Order(models.Model):  # noqa D101
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     email = models.EmailField()
@@ -16,32 +18,32 @@ class Order(models.Model):
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
 
-    class Meta:
+    class Meta:  # noqa D106
         ordering = ('-created',)
 
-    def __str__(self):
+    def __str__(self):  # noqa D105
         return f'Order {self.id}'
 
-    def get_total_cost(self):
+    def get_total_cost(self):  # noqa D102
         return sum(item.get_cost() for item in self.items.all())
 
 
-class OrderItem(models.Model):
+class OrderItem(models.Model):  # noqa D101
     order = models.ForeignKey(
         Order,
         related_name='items',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     product = models.ForeignKey(
         Product,
         related_name='order_items',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 
-    def __str__(self):
+    def __str__(self):  # noqa D105
         return str(self.id)
 
-    def get_cost(self):
+    def get_cost(self):  # noqa D102
         return self.price * self.quantity

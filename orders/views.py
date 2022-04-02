@@ -1,11 +1,16 @@
 """Views files."""
+# Django
 from django.shortcuts import render
+
+# Project
 from cart.cart import Cart
-from .models import OrderItem
+
+# Local
 from .forms import OrderForm
+from .models import OrderItem
 
 
-def order_create(request):
+def order_create(request):  # noqa D103
     cart = Cart(request)
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -16,7 +21,7 @@ def order_create(request):
                     order=order,
                     product=item['product'],
                     price=item['price'],
-                    quantity=item['quantity']
+                    quantity=item['quantity'],
                 )
             cart.clear()
             return render(request,
