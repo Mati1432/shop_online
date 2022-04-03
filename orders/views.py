@@ -25,10 +25,10 @@ def order_create(request):  # noqa D103
                 )
             cart.clear()
             return render(request,
-                          'orders_created.html',
+                          'order_finish.html',
                           {'order': order})
     else:
         form = OrderForm()
     return render(request,
-                  'order_finish.html',
+                  'orders_created.html',
                   {'cart': cart, 'form': form})
