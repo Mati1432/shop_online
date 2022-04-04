@@ -127,5 +127,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
+CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_TIMEZONE = 'Europe/Warsaw'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
