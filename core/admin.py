@@ -3,7 +3,7 @@
 from django.contrib import admin
 
 # Local
-from .models import Category, SettingsMail
+from .models import Category, SettingsMail, Mail
 from .models import Product
 
 
@@ -31,3 +31,8 @@ class SettingsMailAdmin(admin.ModelAdmin):  # noqa D101
     list_filter = ['title', 'name_campaign']
     list_display_links = ('title',)
     list_editable = ['content', 'name_campaign', 'name_group']
+
+
+@admin.register(Mail)
+class MailAdmin(admin.ModelAdmin):  # noqa D101
+    list_display = ['email']
