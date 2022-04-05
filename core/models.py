@@ -46,7 +46,19 @@ class Product(models.Model):  # noqa D101
         return reverse('core:product_detail', args=[self.id, self.slug])
 
 
-class SettingsMail(models.Model): # noqa D101
+class Mail(models.Model):  # noqa D101
+    email = models.EmailField(null=False)
+
+    class Meta:  # noqa: D106
+
+        verbose_name = 'Mail'
+        verbose_name_plural = 'Mailing'
+
+    def __str__(self):  # noqa: D105
+        return f'{self.email}'
+
+
+class SettingsMail(models.Model):  # noqa D101
     title = models.CharField(max_length=90)
     content = models.TextField()
     name_campaign = models.CharField(max_length=40)
