@@ -1,14 +1,21 @@
+"""Utils files."""
+# Standard Library
 import json
 
+# Django
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
-from core.models import SettingsMail, Mail
+# 3rd-party
 import requests
 from mailerlite import MailerLiteApi
-
 from project import settings
+
+# Project
+from core.models import Mail
+
+from core.models import SettingsMail
 
 
 def create_and_send_newsletter(mail):  # noqa D103
@@ -69,7 +76,7 @@ def create_and_send_newsletter(mail):  # noqa D103
 
 def send_mail_password(email):  # noqa D103
     send_mail(
-        'Newsleter',
+        'Newsletter',
         'You are currently subscribed to our newsletter',
         settings.EMAIL_HOST_USER,
         [email],

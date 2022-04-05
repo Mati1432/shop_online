@@ -133,12 +133,11 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # ACCOUNT_EMAIL_VERIFICATION = "none"
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = 'applove757@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 Email_USE_SSL = False
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'QWERTYqwerty1@'

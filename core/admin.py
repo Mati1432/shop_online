@@ -3,8 +3,10 @@
 from django.contrib import admin
 
 # Local
-from .models import Category, SettingsMail, Mail
+from .models import Category
+from .models import Mail
 from .models import Product
+from .models import SettingsMail
 
 
 @admin.register(Category)

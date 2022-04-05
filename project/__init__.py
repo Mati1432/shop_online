@@ -1,2 +1,3 @@
 """Init files."""
-from .celery import app as celery_app
+# Local
+from .celery import app as celery_app  # noqa D100

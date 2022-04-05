@@ -3,15 +3,15 @@
 # Django
 from django import forms
 
-# Project
+# Local
 from .models import Mail
 
 
-class MailForm(forms.ModelForm): # noqa D101
+class MailForm(forms.ModelForm):  # noqa D101
 
     def save(self, commit=True):  # noqa D102
         return super().save()
 
-    class Meta: # noqa D106
+    class Meta:  # noqa D106
         model = Mail
         fields = ['email']

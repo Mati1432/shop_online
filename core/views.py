@@ -2,13 +2,13 @@
 # Django
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 
 # Project
 from cart.forms import CartForm
 from core.forms import MailForm
 from core.models import Category
 from core.models import Product
-from django.views.generic.edit import CreateView
 
 from core.utils import create_and_send_newsletter
 
@@ -44,7 +44,7 @@ class MailView(CreateView):  # noqa D101
     template_name = 'mail.html'
     success_url = '/'
 
-    def form_valid(self, form): # noqa D102
+    def form_valid(self, form):  # noqa D102
         self.form = form
         user_email = self.form.cleaned_data.get('email')
         create_and_send_newsletter(user_email)

@@ -1,4 +1,8 @@
+"""Celery files."""
+# Standard Library
 import os
+
+# 3rd-party
 from celery import Celery
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
