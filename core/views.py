@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 # Project
 from cart.forms import CartForm
+from core.forms import MailForm
 from core.models import Category
 from core.models import Product
 
@@ -33,3 +34,14 @@ def product_detail(request, id, slug):  # noqa D103
     cart_product = CartForm()
     return render(request, 'detail_product.html',
                   {'product': product, 'cart_product': cart_product})
+
+
+class MailView(CreateView):  # noqa D101
+    form_class = MailForm
+    template_name = 'mail.html'
+    success_url = '/'
+
+    def form_valid(self, form): # noqa D102
+        self.form = form
+
+        return super().form_valid(form)
