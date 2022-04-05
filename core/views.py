@@ -8,6 +8,9 @@ from cart.forms import CartForm
 from core.forms import MailForm
 from core.models import Category
 from core.models import Product
+from django.views.generic.edit import CreateView
+
+from core.utils import create_and_send_newsletter
 
 
 def product_list(request, category_slug=None):  # noqa D103
@@ -43,5 +46,6 @@ class MailView(CreateView):  # noqa D101
 
     def form_valid(self, form): # noqa D102
         self.form = form
-
+        user_email = self.form.cleaned_data.get('email')
+        create_and_send_newsletter(user_email)
         return super().form_valid(form)
