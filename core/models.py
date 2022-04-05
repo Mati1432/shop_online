@@ -44,3 +44,19 @@ class Product(models.Model):  # noqa D101
 
     def get_absolute_url(self):  # noqa D102
         return reverse('core:product_detail', args=[self.id, self.slug])
+
+
+class SettingsMail(models.Model): # noqa D101
+    title = models.CharField(max_length=90)
+    content = models.TextField()
+    name_campaign = models.CharField(max_length=40)
+    api_key = models.CharField(max_length=100)
+    name_group = models.CharField(max_length=40)
+
+    class Meta:  # noqa: D106
+
+        verbose_name = 'Settings Mail'
+        verbose_name_plural = 'Settings Mailing'
+
+    def __str__(self):  # noqa: D105
+        return f'{self.title}'
