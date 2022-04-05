@@ -3,7 +3,7 @@
 from django.contrib import admin
 
 # Local
-from .models import Category
+from .models import Category, SettingsMail
 from .models import Product
 
 
@@ -23,3 +23,11 @@ class ProductAdmin(admin.ModelAdmin):  # noqa D101
     prepopulated_fields = {
         'slug': ('name',),
     }
+
+
+@admin.register(SettingsMail)
+class SettingsMailAdmin(admin.ModelAdmin):  # noqa D101
+    list_display = ['title', 'content', 'name_campaign', 'api_key', 'name_group']
+    list_filter = ['title', 'name_campaign']
+    list_display_links = ('title',)
+    list_editable = ['content', 'name_campaign', 'name_group']
